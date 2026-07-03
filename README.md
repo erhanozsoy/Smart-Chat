@@ -5,6 +5,7 @@ Final project for the Building AI course
 ## Summary
 
 Smart Chat is an AI assistant that works alongside any writing field. It uses recent conversation context to suggest relevant replies within seconds, while also allowing users to write their own prompts and generate alternative responses.
+![Smart Chat concept showing context-aware AI replies across email, messaging, marketplaces, and online stores](smart-chat-concept.png)
 
 ## Background
 
@@ -113,4 +114,5 @@ To develop the project further, I would need more knowledge of software developm
 
 * The idea was inspired by my own experience using AI for professional and everyday communication.
 * The project was developed as the final project for the Building AI course by Reaktor Innovations and the University of Helsinki.
+* * The Smart Chat concept image was created specifically for this project using AI-assisted image generation.
 * No external code, images, or datasets were used in the initial project concept.
