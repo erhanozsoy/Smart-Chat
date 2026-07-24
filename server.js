@@ -37,8 +37,39 @@ const app = express();
 app.use(express.json({ limit: "20kb" }));
 app.use(express.static(__dirname));
 
-app.post("/api/suggest-reply", async (req, res) => {
-  const { conversation, instruction, tone } = req.body ?? {};
+const apiRouter = express.Router();
+
+// Phase 3: the Chrome extension's side panel runs on a chrome-extension://
+// origin, so requests to /api/* are cross-origin and need explicit CORS
+// headers. Scoped to chrome-extension:// origins only — regular websites
+// are never granted access, and no secrets are ever included in the response.
+apiRouter.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && origin.startsWith("chrome-extension://")) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  }
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
+// Lightweight reachability check used by the extension's side panel to show
+// a "server connected / offline" indicator. No sensitive data returned.
+apiRouter.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
+apiRouter.post("/suggest-reply", async (req, res) => {
+  const body = req.body ?? {};
+  // Accept both the original web app field names (conversation/instruction)
+  // and the Chrome extension's field names (recentConversation/
+  // additionalInstruction) so neither caller has to change.
+  const conversation = body.conversation ?? body.recentConversation;
+  const instruction = body.instruction ?? body.additionalInstruction;
+  const { tone } = body;
 
   if (typeof conversation !== "string" || conversation.trim().length === 0) {
     return res.status(400).json({ error: "Please provide a conversation to reply to." });
@@ -82,6 +113,8 @@ app.post("/api/suggest-reply", async (req, res) => {
     return res.status(502).json({ error: "Something went wrong. Please try again." });
   }
 });
+
+app.use("/api", apiRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

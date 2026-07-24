@@ -1,0 +1,549 @@
+/*
+ * Theme variables. `:root` holds the light palette as the baseline default.
+ * The @media block below is a pre-JS fallback only (so there's no flash of
+ * the wrong theme in the brief moment before sidepanel.js resolves and
+ * applies a theme) — once JS runs, it always sets an explicit
+ * documentElement[data-theme], and the [data-theme="…"] rules below have
+ * higher specificity than the plain `:root` media-query block, so they win.
+ */
+:root {
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-input-bg: #ffffff;
+  --color-border: #dfe2e7;
+  --color-text: #1c1f26;
+  --color-text-muted: #5c6270;
+  --color-placeholder: #8a90a0;
+  --color-secondary-bg-hover: #e2e5ee;
+  --color-error-bg: #fdecec;
+  --color-error-border: #f3b4b4;
+  --color-error-text: #9a2626;
+
+  /*
+   * Button / accent system — a single accent family (soft periwinkle /
+   * blue-violet) runs through Suggest Reply (strong version), the Warm
+   * tone's active state, Capture Conversation, Another Reply, and the
+   * Light theme-toggle option — one consistent accent instead of scattered
+   * per-button hues. --accent-soft/-hover/-border/-text are the muted
+   * "resting" tier used by secondary actions; --accent-primary/-hover are
+   * the stronger tier used only by Suggest Reply and active-state text.
+   */
+  --accent-primary: #5f63f2;
+  --accent-primary-hover: #5155df;
+  --accent-soft: #f0f1ff;
+  --accent-soft-hover: #e7e9ff;
+  --accent-border: #cfd2ff;
+  --accent-text: #5559e8;
+  --accent-shadow: rgba(95, 99, 242, 0.18);
+  --accent-shadow-hover: rgba(95, 99, 242, 0.28);
+  --accent-success: #16a34a;
+  --accent-success-bg: #eafbf0;
+  --accent-warning: #d97706;
+  --button-bg: #f1f2f6;
+  --button-border: #e4e6ec;
+  --button-text: #33394a;
+  --focus-ring: rgba(95, 99, 242, 0.22);
+
+  --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14161c;
+    --color-surface: #1e212b;
+    --color-input-bg: #242837;
+    --color-border: #383e50;
+    --color-text: #eceef2;
+    --color-text-muted: #aab0c2;
+    --color-placeholder: #8189a8;
+    --color-secondary-bg-hover: #383e4c;
+    --color-error-bg: #34201f;
+    --color-error-border: #6b3232;
+    --color-error-text: #f5b3b3;
+
+    --accent-primary: #818cf8;
+    --accent-primary-hover: #a5b4fc;
+    --accent-soft: #2f3562;
+    --accent-soft-hover: #3a4178;
+    --accent-border: #4d54a0;
+    --accent-text: #b8c0ff;
+    --accent-shadow: rgba(129, 140, 248, 0.35);
+    --accent-shadow-hover: rgba(129, 140, 248, 0.45);
+    --accent-success: #4ade80;
+    --accent-success-bg: #1c3d27;
+    --accent-warning: #fbbf24;
+    --button-bg: #2a2e3a;
+    --button-border: #424858;
+    --button-text: #e4e7ef;
+    --focus-ring: rgba(129, 140, 248, 0.4);
+  }
+}
+
+/* Explicit theme selection (set by sidepanel.js via documentElement.dataset.theme).
+   Takes priority over the @media default above once JS has run. */
+:root[data-theme="light"] {
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-input-bg: #ffffff;
+  --color-border: #dfe2e7;
+  --color-text: #1c1f26;
+  --color-text-muted: #5c6270;
+  --color-placeholder: #8a90a0;
+  --color-secondary-bg-hover: #e2e5ee;
+  --color-error-bg: #fdecec;
+  --color-error-border: #f3b4b4;
+  --color-error-text: #9a2626;
+
+  --accent-primary: #5f63f2;
+  --accent-primary-hover: #5155df;
+  --accent-soft: #f0f1ff;
+  --accent-soft-hover: #e7e9ff;
+  --accent-border: #cfd2ff;
+  --accent-text: #5559e8;
+  --accent-shadow: rgba(95, 99, 242, 0.18);
+  --accent-shadow-hover: rgba(95, 99, 242, 0.28);
+  --accent-success: #16a34a;
+  --accent-success-bg: #eafbf0;
+  --accent-warning: #d97706;
+  --button-bg: #f1f2f6;
+  --button-border: #e4e6ec;
+  --button-text: #33394a;
+  --focus-ring: rgba(95, 99, 242, 0.22);
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #14161c;
+  --color-surface: #1e212b;
+  --color-input-bg: #242837;
+  --color-border: #383e50;
+  --color-text: #eceef2;
+  --color-text-muted: #aab0c2;
+  --color-placeholder: #8189a8;
+  --color-secondary-bg-hover: #383e4c;
+  --color-error-bg: #34201f;
+  --color-error-border: #6b3232;
+  --color-error-text: #f5b3b3;
+
+  --accent-primary: #818cf8;
+  --accent-primary-hover: #a5b4fc;
+  --accent-soft: #2f3562;
+  --accent-soft-hover: #3a4178;
+  --accent-border: #4d54a0;
+  --accent-text: #b8c0ff;
+  --accent-shadow: rgba(129, 140, 248, 0.35);
+  --accent-shadow-hover: rgba(129, 140, 248, 0.45);
+  --accent-success: #4ade80;
+  --accent-success-bg: #1c3d27;
+  --accent-warning: #fbbf24;
+  --button-bg: #2a2e3a;
+  --button-border: #424858;
+  --button-text: #e4e7ef;
+  --focus-ring: rgba(129, 140, 248, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.4;
+  font-size: 14px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.panel-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.panel-header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 2px 6px var(--accent-shadow);
+  color: #fff;
+}
+
+/* Theme toggle — small, rounded, soft border; matches the tone segmented
+   control's design language (see .tone-options / .tone-option below). */
+.theme-toggle {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--button-border);
+  border-radius: 999px;
+  background: var(--button-bg);
+  flex-shrink: 0;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.theme-option .theme-icon {
+  flex-shrink: 0;
+}
+
+.theme-option:hover {
+  color: var(--color-text);
+}
+
+.theme-option.active {
+  background: var(--color-surface);
+  color: var(--accent-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: background-color 0.18s ease;
+}
+
+.status.online .status-dot {
+  background: var(--accent-success);
+}
+
+.status.offline .status-dot {
+  background: var(--accent-warning);
+}
+
+.panel-body {
+  flex: 1;
+  padding: 14px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label,
+.label-text {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  resize: vertical;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+textarea::placeholder,
+input[type="text"]::placeholder {
+  color: var(--color-placeholder);
+}
+
+textarea:focus,
+input[type="text"]:focus,
+.tone-option:focus-visible,
+.theme-option:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Tone segmented control — soft pill track, quiet unless active. */
+.tone-options {
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+
+.tone-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+  padding: 7px 6px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  border-radius: calc(var(--radius) - 3px);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tone-icon {
+  flex-shrink: 0;
+}
+
+.tone-option:hover {
+  color: var(--color-text);
+  background: var(--color-secondary-bg-hover);
+}
+
+/* One shared active state for all three tones — Warm, Professional, and
+   Short all get the same accent treatment (icon + text follow the accent
+   system) when selected; only the icon shape and label differ between
+   them. Nothing tone-specific here on purpose. */
+.tone-option.active {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.actions {
+  display: flex;
+}
+
+/*
+ * Button hierarchy
+ * -----------------
+ * Primary   (#suggest-btn)              — the one action that should draw
+ *                                          the eye: strong accent gradient,
+ *                                          gentle glow, lifts slightly on
+ *                                          hover.
+ * Secondary (#capture-btn, #another-btn) — soft accent surface (same
+ *                                          periwinkle family as Primary,
+ *                                          every active tone option, and the
+ *                                          Light theme option) so the whole
+ *                                          panel reads as one consistent
+ *                                          accent system rather than
+ *                                          several competing hues.
+ * Utility   (#copy-btn)                  — compact, quiet by default, brief
+ *                                          green "Copied" state.
+ */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+    box-shadow 0.18s ease, transform 0.12s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(0.5px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  padding: 9px 16px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover));
+  color: #fff;
+  box-shadow: 0 2px 8px var(--accent-shadow);
+}
+
+.suggest-icon {
+  flex-shrink: 0;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--accent-shadow-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--accent-shadow);
+}
+
+.btn-secondary,
+.btn-utility {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--button-border);
+  font-weight: 500;
+}
+
+.btn-secondary:hover:not(:disabled),
+.btn-utility:hover:not(:disabled) {
+  background: var(--color-secondary-bg-hover);
+  border-color: var(--color-border);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active:not(:disabled),
+.btn-utility:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  font-size: 0.8rem;
+  padding: 7px 12px;
+}
+
+/* Capture Conversation and Another Reply share the same soft accent
+   surface — one consistent accent system instead of a different hue per
+   button. */
+#capture-btn,
+#another-btn {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  border-color: var(--accent-border);
+}
+
+#capture-btn:hover:not(:disabled),
+#another-btn:hover:not(:disabled) {
+  background: var(--accent-soft-hover);
+  border-color: var(--accent-primary);
+}
+
+#capture-btn {
+  align-self: flex-start;
+}
+
+.btn-utility {
+  font-size: 0.78rem;
+  padding: 6px 12px;
+}
+
+.btn-utility.copied {
+  background: var(--accent-success-bg);
+  border-color: var(--accent-success);
+  color: var(--accent-success);
+}
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  padding: 4px 0;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-state {
+  background: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error-text);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.error-state p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.result-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hidden {
+  display: none !important;
+}
