@@ -8,6 +8,30 @@ Smart Chat is an AI assistant that works alongside any writing field. It uses re
 
 ![Smart Chat concept showing context-aware AI replies across email, messaging, marketplaces, and online stores](smart-chat-concept.png)
 
+## Setup (Phase 2 — running the app locally)
+
+Phase 2 adds a small Node.js/Express backend that calls the real Claude API. Your API key stays on your machine and is never committed to Git or sent to the browser.
+
+1. **Install dependencies**
+   ```
+   npm install
+   ```
+2. **Add your API key**
+   Copy `.env.example` to a new file named `.env`, then open `.env` and paste in your own Anthropic API key:
+   ```
+   cp .env.example .env
+   ```
+   ```
+   ANTHROPIC_API_KEY=your-real-key-here
+   PORT=3000
+   ```
+   Your key is yours alone — don't paste it into chat messages, commit it, or share the `.env` file with anyone. `.env` is already listed in `.gitignore`, so `git status` should never show it as a file to be committed.
+3. **Start the server**
+   ```
+   npm start
+   ```
+4. Open **http://localhost:3000** in your browser. The frontend is now served by the same backend that talks to Claude, so no separate setup is needed.
+
 ## Background
 
 People write messages every day across many different platforms, including WhatsApp, email, social media, marketplaces, customer service systems, and business tools. AI can already help people write better replies, but using it often requires a repetitive process: switching to a separate AI application, copying the recent conversation, explaining the context, asking for a response, and then copying the result back to the original application.

@@ -1,0 +1,16 @@
+{
+  "name": "smart-chat",
+  "version": "1.0.0",
+  "description": "Smart Chat reply assistant backend (Phase 2)",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.113.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}
